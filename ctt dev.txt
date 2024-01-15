@@ -1,0 +1,5 @@
+FW: PHP Native
+
+PHP7:
+- !get_magic_quotes_gpc tidak digunakan di php versi 7
+- perubahan code !get_magic_quotes_gpc di includes/general.php dengan menambah @
