@@ -34,8 +34,8 @@ if ($mod=='login'){
     header("location:index.php?m=login");
 }
 
-/** DIAGNOSA */
-elseif($mod=='diagnosa_tambah'){
+/** penyakit */
+elseif($mod=='penyakit_tambah'){
     $kode = $_POST['kode'];
     $nama = $_POST['nama'];
     $solusi = $_POST['solusi'];
@@ -45,9 +45,9 @@ elseif($mod=='diagnosa_tambah'){
         print_msg("Kode sudah ada!");
     else{
         $db->query("INSERT INTO tb_penyakit (kode_penyakit, nama_penyakit, solusi) VALUES ('$kode', '$nama',  '$solusi')");                       
-        redirect_js("index.php?m=diagnosa");
+        redirect_js("index.php?m=penyakit");
     }
-} else if($mod=='diagnosa_ubah'){
+} else if($mod=='penyakit_ubah'){
     $kode = $_POST['kode'];
     $nama = $_POST['nama'];
     $solusi = $_POST['solusi'];
@@ -55,12 +55,12 @@ elseif($mod=='diagnosa_tambah'){
         print_msg("Field yang bertanda * tidak boleh kosong!");
     else{
         $db->query("UPDATE tb_penyakit SET nama_penyakit='$nama' , solusi='$solusi' WHERE kode_penyakit='$_GET[ID]'");
-        redirect_js("index.php?m=diagnosa");
+        redirect_js("index.php?m=penyakit");
     }
-} else if ($act=='diagnosa_hapus'){
+} else if ($act=='penyakit_hapus'){
     $db->query("DELETE FROM tb_penyakit WHERE kode_penyakit='$_GET[ID]'");
     $db->query("DELETE FROM tb_relasi WHERE kode_penyakit='$_GET[ID]'");
-    header("location:index.php?m=diagnosa");
+    header("location:index.php?m=penyakit");
 } 
 
 /** GEJALA */    
@@ -94,58 +94,58 @@ elseif($mod=='gejala_tambah'){
     header("location:index.php?m=gejala");
 } 
     
-/** RELASI TAMBAH */ 
-else if ($mod=='relasi_tambah'){
+/** PENGETAHUAN */ 
+else if ($mod=='pengetahuan_tambah'){
     $kode_penyakit = $_POST['kode_penyakit'];
     $kode_gejala = $_POST['kode_gejala'];
     $mb = $_POST['mb'];
     $md = $_POST['md'];
     
-    $kombinasi_ada = $db->get_row("SELECT * FROM tb_relasi WHERE kode_penyakit='$kode_penyakit' AND kode_gejala='$kode_gejala'");
+    $kombinasi_ada = $db->get_row("SELECT * FROM tb_pengetahuan WHERE kode_penyakit='$kode_penyakit' AND kode_gejala='$kode_gejala'");
     
     if($kode_penyakit=='' || $kode_gejala=='' || $mb=='' || $md=='')
         print_msg("Field bertanda * tidak boleh kosong!");
     elseif($kombinasi_ada)
         print_msg("Kombinasi kode_penyakit dan gejala sudah ada!");
     else{
-        $db->query("INSERT INTO tb_relasi (kode_penyakit, kode_gejala, mb, md) VALUES ('$kode_penyakit', '$kode_gejala', '$mb', '$md')");
-        redirect_js("index.php?m=relasi");
+        $db->query("INSERT INTO tb_pengetahuan (kode_penyakit, kode_gejala, mb, md) VALUES ('$kode_penyakit', '$kode_gejala', '$mb', '$md')");
+        redirect_js("index.php?m=pengetahuan");
     }   
-}else if ($mod=='relasi_ubah'){
+}else if ($mod=='pengetahuan_ubah'){
     $kode_penyakit = $_POST['kode_penyakit'];
     $kode_gejala = $_POST['kode_gejala'];
     $mb = $_POST['mb'];
     $md = $_POST['md'];
     
-    $kombinasi_ada = $db->get_row("SELECT * FROM tb_relasi WHERE kode_penyakit='$kode_penyakit' AND kode_gejala='$kode_gejala' AND ID<>'$_GET[ID]'");
+    $kombinasi_ada = $db->get_row("SELECT * FROM tb_pengetahuan WHERE kode_penyakit='$kode_penyakit' AND kode_gejala='$kode_gejala' AND ID<>'$_GET[ID]'");
     
     if($kode_penyakit=='' || $kode_gejala=='' || $mb=='' || $md=='')
         print_msg("Field bertanda * tidak boleh kosong!");
     elseif($kombinasi_ada)
-        print_msg("Kombinasi diagnosa dan gejala sudah ada!");
+        print_msg("Kombinasi penyakit dan gejala sudah ada!");
     else{
-        $db->query("UPDATE tb_relasi SET kode_penyakit='$kode_penyakit', kode_gejala='$kode_gejala', mb='$mb', md='$md' WHERE ID='$_GET[ID]'");
-        redirect_js("index.php?m=relasi");
+        $db->query("UPDATE tb_pengetahuan SET kode_penyakit='$kode_penyakit', kode_gejala='$kode_gejala', mb='$mb', md='$md' WHERE ID='$_GET[ID]'");
+        redirect_js("index.php?m=pengetahuan");
     }  
-    header("location:index.php?m=relasi");
+    header("location:index.php?m=pengetahuan");
 } else if ($act=='relasi_hapus'){
-    $db->query("DELETE FROM tb_relasi WHERE ID='$_GET[ID]'");
-    header("location:index.php?m=relasi");
+    $db->query("DELETE FROM tb_pengetahuan WHERE ID='$_GET[ID]'");
+    header("location:index.php?m=pengetahuan");
 } else if ($act=='laporan_hapus'){
     $db->query("DELETE FROM tb_hasil WHERE id='$_GET[ID]'");
     header("location:index.php?m=laporan");
 } else if ($mod=='konsultasi') {
-    if($_POST['yes'])
-        $db->query("INSERT INTO tb_konsultasi (kode_gejala, jawaban) VALUES ('$_POST[kode_gejala]', 'Ya')");
-    elseif($_POST['no'])
-        $db->query("INSERT INTO tb_konsultasi (kode_gejala, jawaban) VALUES ('$_POST[kode_gejala]', 'Tidak')");
-    elseif($act=='new')
+
+    if($_POST['bobot']) {        
+        $db->query("INSERT INTO tb_konsultasi (kode_gejala, jawaban) VALUES ('$_POST[kode_gejala]', '$_POST[bobot]')");
+    } elseif($act=='new') {        
         $db->query("TRUNCATE TABLE tb_konsultasi");
-        
+    }
+
     header("location:index.php?m=konsultasi");
 }
 
-
+/** ADMIN */
 elseif($mod=='admin_tambah'){
     $nama = $_POST['nama'];
     $user = $_POST['user'];

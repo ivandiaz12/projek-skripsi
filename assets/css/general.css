@@ -62,3 +62,7 @@ body {
 .panel .oxa .table thead tr:first-child th {
     border-bottom: 0;
 }
+
+.tambah {
+  margin-bottom: 16px;
+}

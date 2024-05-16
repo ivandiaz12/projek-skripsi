@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2023 at 05:23 PM
+-- Generation Time: Feb 07, 2024 at 12:19 AM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.1.29
 
@@ -88,6 +88,9 @@ CREATE TABLE `tb_hasil` (
 --
 
 INSERT INTO `tb_hasil` (`id`, `nik`, `nama`, `no_hp`, `jk`, `alamat`, `tgl`, `hasil_konsultasi`, `kepercayaan`) VALUES
+(527, '', '', '', '', '', '', '', '0'),
+(528, '', '', '', '', '', '', 'gigi berlubang', '36'),
+(526, '', 'tono', '09073689714187', 'Perempuan', 'jakarta', '04:13 - 07 Februari 2024', '', ''),
 (519, '', 'tono', '08972635352', 'Laki - Laki', 'jakarta', '14:39 - 01 Desember 2023', 'gigi berlubang', '1.44'),
 (522, '', 'tono', '09073689714187', 'Laki - Laki', 'jakarta', '17:19 - 03 Desember 2023', '', ''),
 (520, '', 'tono', '08972635352', 'Laki - Laki', 'jakarta', '14:53 - 01 Desember 2023', '', ''),
@@ -116,7 +119,32 @@ CREATE TABLE `tb_konsultasi` (
 --
 
 INSERT INTO `tb_konsultasi` (`ID`, `kode_gejala`, `jawaban`) VALUES
-(1, 'G001', 'Ya');
+(1, 'G001', 'Ya'),
+(2, 'G002', 'Ya');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_pengetahuan`
+--
+
+CREATE TABLE `tb_pengetahuan` (
+  `ID` int(11) NOT NULL,
+  `kode_penyakit` varchar(16) DEFAULT NULL,
+  `kode_gejala` varchar(16) DEFAULT NULL,
+  `mb` double DEFAULT NULL,
+  `md` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_pengetahuan`
+--
+
+INSERT INTO `tb_pengetahuan` (`ID`, `kode_penyakit`, `kode_gejala`, `mb`, `md`) VALUES
+(2, 'P001', 'G001', 1, 0.4),
+(3, 'P001', 'G002', 1, 0.4),
+(4, 'P001', 'G003', 1, 0.8),
+(15, 'P001', 'G004', 1, 0.2);
 
 -- --------------------------------------------------------
 
@@ -140,30 +168,6 @@ INSERT INTO `tb_penyakit` (`kode_penyakit`, `nama_penyakit`, `solusi`) VALUES
 ('P003', 'Gigi Abrasi', 'Segera Hubungi dokter untuk melakukan penambalan gigi dengan bahan komposit untuk melindungi dentin sekaligus mengembalikan bentuk gigi.'),
 ('P004', 'Gigi Hipersensitif', 'Menajaga kebersihan gigi, menggunakan pasta gigi khusus gigi hiperensitif atau mengandung Fluoride, membersihkan gigi dengan benang gigi (dental floss)'),
 ('P005', 'Gingivitis (Radang Gusi) ', 'Menjaga kesehatan gigi dan mulut, segera hubungi dokter apabila kondisi semakin parah');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_relasi`
---
-
-CREATE TABLE `tb_relasi` (
-  `ID` int(11) NOT NULL,
-  `kode_penyakit` varchar(16) DEFAULT NULL,
-  `kode_gejala` varchar(16) DEFAULT NULL,
-  `mb` double DEFAULT NULL,
-  `md` double DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_relasi`
---
-
-INSERT INTO `tb_relasi` (`ID`, `kode_penyakit`, `kode_gejala`, `mb`, `md`) VALUES
-(2, 'P001', 'G001', 1, 0.4),
-(3, 'P001', 'G002', 1, 0.4),
-(4, 'P001', 'G003', 1, 0.8),
-(14, 'P001', 'G004', 1, 0.8);
 
 --
 -- Indexes for dumped tables
@@ -194,16 +198,16 @@ ALTER TABLE `tb_konsultasi`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `tb_pengetahuan`
+--
+ALTER TABLE `tb_pengetahuan`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `tb_penyakit`
 --
 ALTER TABLE `tb_penyakit`
   ADD PRIMARY KEY (`kode_penyakit`);
-
---
--- Indexes for table `tb_relasi`
---
-ALTER TABLE `tb_relasi`
-  ADD PRIMARY KEY (`ID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -219,19 +223,19 @@ ALTER TABLE `tb_admin`
 -- AUTO_INCREMENT for table `tb_hasil`
 --
 ALTER TABLE `tb_hasil`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=526;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=529;
 
 --
 -- AUTO_INCREMENT for table `tb_konsultasi`
 --
 ALTER TABLE `tb_konsultasi`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `tb_relasi`
+-- AUTO_INCREMENT for table `tb_pengetahuan`
 --
-ALTER TABLE `tb_relasi`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+ALTER TABLE `tb_pengetahuan`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

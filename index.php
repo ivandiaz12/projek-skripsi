@@ -9,8 +9,7 @@ include'functions.php';
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Program Sistem Pakar Diagnosa</title>
-    
+    <title>Program Sistem Pakar</title>
     <link href="assets/css/yeti-bootstrap.min.css" rel="stylesheet"/>
     <link href="assets/css/general.css" rel="stylesheet"/>
     <link href="assets/css/select2.min.css" rel="stylesheet"/>
@@ -91,7 +90,7 @@ background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('d
         background-color:   #718093;
         color: #fff;
     }
-    </style>              
+    </style>        
   </head>
   <body>
     <nav class="navbar navbar-default navbar-static-top">
@@ -110,9 +109,9 @@ background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('d
           <ul class="nav navbar-nav">
             <?php if($_SESSION['login']):?>
             <li><a href="?" class="t"><b>Beranda</b></a></li>  
-            <li><a href="?m=diagnosa" class="t"><b>Penyakit</b></a></li>
+            <li><a href="?m=penyakit" class="t"><b>Penyakit</b></a></li>
             <li><a href="?m=gejala" class="t"><b>Gejala</b></a></li>
-            <li><a href="?m=relasi" class="t"><b>Pengetahuan</b></a></li>
+            <li><a href="?m=pengetahuan" class="t"><b>Pengetahuan</b></a></li>
             <li><a href="?m=laporan" class="t"><b>Laporan</b></a></li>    
             <li><a href="?m=password" class="t"><b>Password</b></a></li>            
             <li><a href="?m=admin" class="t"><b>admin</b></a></li>
@@ -131,7 +130,7 @@ background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('d
     <div>
     <div class="container">
     <?php
-        if(!$_SESSION['login'] && in_array($mod, array('diagnosa', 'gejala', 'relasi', 'rule', 'password')))
+        if(!$_SESSION['login'] && in_array($mod, array('penyakit', 'gejala', 'relasi', 'rule', 'password')))
           $mod='home';
 
         if(file_exists($mod.'.php'))

@@ -56,7 +56,7 @@ foreach($rows as $row):?>
 </table>
 <?php
 $rows = $db->get_results("SELECT * 
-    FROM tb_relasi r INNER JOIN tb_penyakit d ON d.kode_penyakit = r.kode_diagnosa      
+    FROM tb_pengetahuan r INNER JOIN tb_penyakit d ON d.kode_penyakit = r.kode_diagnosa      
     WHERE r.kode_gejala IN (SELECT kode_gejala FROM tb_konsultasi WHERE jawaban='Ya') ORDER BY r.kode_penyakit, r.kode_gejala");
 
 foreach($rows as $row){

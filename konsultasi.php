@@ -1,4 +1,7 @@
 <?php
+
+include './includes/constants.php';
+
 $terjawab = get_terjawab();
 $relasi = get_relasi($terjawab);
 $kode_gejala = get_next_gejala($relasi);
@@ -25,7 +28,7 @@ if(!$row){
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>    
     <script src="assets/js/select2.min.js"></script>   
-    <style type="text/css">
+        <style type="text/css">
     .hi{
 background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('dokter.jpg');
     background-size: cover;
@@ -57,7 +60,7 @@ background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('d
         background-color:   #718093;
         color: #fff;
     }
-    </style>      
+    </style>  
   </head>
   <body class="dark hi" >
 <div class="page-header">
@@ -86,12 +89,18 @@ else:?>
             <input type="hidden" name="kode_gejala" value="<?=$row->kode_gejala?>" />
             <p>&nbsp;</p>
             <p align="center">
-                <button name="yes" class="btn tambah" value="1"><span class="glyphicon glyphicon-ok-sign"></span> Ya</button>
-                <button name="no" class="btn tambah" value="1"><span class="glyphicon glyphicon-remove-sign"></span> Tidak</button> 
-                
-                <?php if($count):?>           
-                <a class="btn edit" href="?m=konsultasi&success=1"><span class="glyphicon glyphicon-arrow-right"></span> Lihat Hasil</a>
-                <a class="btn edit" href="aksi.php?m=konsultasi&act=new"><span class="glyphicon glyphicon-ban-circle"></span> Batal</a>
+                <select name="bobot" class="form-select form-select-lg" aria-label=".form-select-lg example">
+                  <option selected>Pilih</option>
+                  <?php foreach ($BOBOT as $k => $v): ?>
+                      <option value="<?= $k ?>"><?= $k ?></option>
+                  <?php endforeach ?>
+                </select>
+
+                <button type="submit" class="btn btn-xs btn-primary">Lanjut</button>
+
+                <?php if($count):?>
+                    <a class="btn edit" href="?m=konsultasi&success=1"><span class="glyphicon glyphicon-arrow-right"></span> Lihat Hasil</a>
+                    <a class="btn edit" href="aksi.php?m=konsultasi&act=new"><span class="glyphicon glyphicon-ban-circle"></span> Batal</a>
                 <?php endif?>
             </p>
         </form>

@@ -48,7 +48,7 @@ function  get_next_gejala($relasi){
 function get_relasi($terjawab){
     global $db;
     $rows = $db->get_results("SELECT kode_penyakit, r.kode_gejala 
-        FROM tb_relasi r
+        FROM tb_pengetahuan r
         ORDER BY kode_penyakit, r.kode_gejala");
     $arr = array();
     foreach($rows as $row){

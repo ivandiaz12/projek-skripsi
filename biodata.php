@@ -55,7 +55,7 @@ function TanggalIndonesia($date) {
     return $tanggalIndonesia;
 }
  ?>
-<body class="dark hi" >
+<body class="dark hi">
 <div class="page-header">
     <h1 style="color: #fff;">Isi Data Konsultasi</h1>
 </div>

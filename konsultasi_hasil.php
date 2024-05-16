@@ -1,4 +1,7 @@
 <?php
+
+include "./includes/constants.php";
+
 $rows = $db->get_results("SELECT * FROM tb_gejala WHERE kode_gejala IN (SELECT kode_gejala FROM tb_konsultasi WHERE jawaban='Ya')");
 if( !$rows ) :
     print_msg('Belum ada gejala terpilih!', 'warning');
@@ -56,18 +59,21 @@ else:
     ?>
     </table>
 </div>
+
+abcd<?php echo "efgh"; exit; ?>
+
 <?php
 $rows = $db->get_results("SELECT * 
-    FROM tb_relasi r INNER JOIN tb_penyakit d ON d.kode_penyakit = r.kode_penyakit      
-    WHERE r.kode_gejala IN (SELECT kode_gejala FROM tb_konsultasi WHERE jawaban='Ya') ORDER BY r.kode_penyakit, r.kode_gejala");
+    FROM tb_pengetahuan r INNER JOIN tb_penyakit d ON d.kode_penyakit = r.kode_penyakit      
+    WHERE r.kode_gejala IN (SELECT kode_gejala FROM tb_konsultasi) ORDER BY r.kode_penyakit, r.kode_gejala");
 
-foreach($rows as $row){
-   @$diagnosa[$row->kode_penyakit]['mb'] = $diagnosa[$row->kode_penyakit]['mb'] + $row->mb * (1 - $diagnosa[$row->kode_penyakit]['mb']);
+    foreach($rows as $row){
+        @$diagnosa[$row->kode_penyakit]['mb'] = $diagnosa[$row->kode_penyakit]['mb'] + $row->mb * (1 - $diagnosa[$row->kode_penyakit]['mb']);
 
-    @$diagnosa[$row->kode_penyakit]['md'] = $diagnosa[$row->kode_penyakit]['md'] + $row->md * (1 - $diagnosa[$row->kode_penyakit]['md']);
-    
-    @$diagnosa[$row->kode_penyakit]['cf'] = $diagnosa[$row->kode_penyakit]['mb'] -  $diagnosa[$row->kode_penyakit]['md'];     
-}
+        @$diagnosa[$row->kode_penyakit]['md'] = $diagnosa[$row->kode_penyakit]['md'] + $row->md * (1 - $diagnosa[$row->kode_penyakit]['md']);
+        
+        // @$diagnosa[$row->kode_penyakit]['cf'] = $diagnosa[$row->kode_penyakit]['mb'] - $diagnosa[$row->kode_penyakit]['md'] * $BOBOT[$row->jawaban];
+    }
 ?>
 <div class="panel panel-default">
     <div class="panel-heading">        
@@ -130,17 +136,17 @@ foreach($rows as $row){
 <?php endif;?>
 <div class="page-header">
     <?php
-    require_once 'functions.php';
-    $nama =$rowd->nama;
-    $no_hp =$rowd->no_hp;
-    $jk=$rowd->jk;
-    $alamat =$rowd->alamat;
-    $tgl =$rowd->tgl;
-    $hasildiagnosa=$DIAGNOSA[key($rank)]->nama_penyakit;
+    // require_once 'functions.php';
+    // $nama =$rowd->nama;
+    // $no_hp =$rowd->no_hp;
+    // $jk=$rowd->jk;
+    // $alamat =$rowd->alamat;
+    // $tgl =$rowd->tgl;
+    // $hasildiagnosa=$DIAGNOSA[key($rank)]->nama_penyakit;
 
-    $mmk=$diagnosa[$key]['cf'] * 100;
+    // $mmk=$diagnosa[$key]['cf'] * 100;
 
-    $db->query("INSERT INTO tb_hasil(nama, no_hp,jk,alamat,tgl,hasil_konsultasi,kepercayaan) VALUES('$nama','$no_hp','$jk','$alamat','$tgl','$hasildiagnosa','$mmk')");
+    // $db->query("INSERT INTO tb_hasil(nama, no_hp,jk,alamat,tgl,hasil_konsultasi,kepercayaan) VALUES('$nama','$no_hp','$jk','$alamat','$tgl','$hasildiagnosa','$mmk')");
 
     ?>
 
