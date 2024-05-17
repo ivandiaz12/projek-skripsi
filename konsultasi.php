@@ -60,6 +60,12 @@ background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('d
         background-color:   #718093;
         color: #fff;
     }
+    .select2-container .select2-selection--single {
+        height: 40px!important
+    }
+    .select2-selection__rendered { padding: 5px 0 }
+    .select2-selection__arrow { margin: 6px 0 }
+
     </style>  
   </head>
   <body class="dark hi" >
@@ -96,7 +102,7 @@ else:?>
                   <?php endforeach ?>
                 </select>
 
-                <button type="submit" class="btn btn-xs btn-primary">Lanjut</button>
+                <button type="submit" class="btn edit">Lanjut</button>
 
                 <?php if($count):?>
                     <a class="btn edit" href="?m=konsultasi&success=1"><span class="glyphicon glyphicon-arrow-right"></span> Lihat Hasil</a>
