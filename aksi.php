@@ -99,32 +99,32 @@ else if ($mod=='pengetahuan_tambah'){
     $kode_penyakit = $_POST['kode_penyakit'];
     $kode_gejala = $_POST['kode_gejala'];
     $mb = $_POST['mb'];
-    $md = $_POST['md'];
+    
     
     $kombinasi_ada = $db->get_row("SELECT * FROM tb_pengetahuan WHERE kode_penyakit='$kode_penyakit' AND kode_gejala='$kode_gejala'");
     
-    if($kode_penyakit=='' || $kode_gejala=='' || $mb=='' || $md=='')
+    if($kode_penyakit=='' || $kode_gejala=='' || $mb=='' )
         print_msg("Field bertanda * tidak boleh kosong!");
     elseif($kombinasi_ada)
         print_msg("Kombinasi kode_penyakit dan gejala sudah ada!");
     else{
-        $db->query("INSERT INTO tb_pengetahuan (kode_penyakit, kode_gejala, mb, md) VALUES ('$kode_penyakit', '$kode_gejala', '$mb', '$md')");
+        $db->query("INSERT INTO tb_pengetahuan (kode_penyakit, kode_gejala, mb ) VALUES ('$kode_penyakit', '$kode_gejala', '$mb')");
         redirect_js("index.php?m=pengetahuan");
     }   
 }else if ($mod=='pengetahuan_ubah'){
     $kode_penyakit = $_POST['kode_penyakit'];
     $kode_gejala = $_POST['kode_gejala'];
     $mb = $_POST['mb'];
-    $md = $_POST['md'];
+    
     
     $kombinasi_ada = $db->get_row("SELECT * FROM tb_pengetahuan WHERE kode_penyakit='$kode_penyakit' AND kode_gejala='$kode_gejala' AND ID<>'$_GET[ID]'");
     
-    if($kode_penyakit=='' || $kode_gejala=='' || $mb=='' || $md=='')
+    if($kode_penyakit=='' || $kode_gejala=='' || $mb=='')
         print_msg("Field bertanda * tidak boleh kosong!");
     elseif($kombinasi_ada)
         print_msg("Kombinasi penyakit dan gejala sudah ada!");
     else{
-        $db->query("UPDATE tb_pengetahuan SET kode_penyakit='$kode_penyakit', kode_gejala='$kode_gejala', mb='$mb', md='$md' WHERE ID='$_GET[ID]'");
+        $db->query("UPDATE tb_pengetahuan SET kode_penyakit='$kode_penyakit', kode_gejala='$kode_gejala', mb='$mb' WHERE ID='$_GET[ID]'");
         redirect_js("index.php?m=pengetahuan");
     }  
     header("location:index.php?m=pengetahuan");

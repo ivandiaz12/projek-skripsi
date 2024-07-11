@@ -27,10 +27,7 @@
                 <label style="color: #fff;">CFU <span class="text-danger">*</span></label>
                 <input class="form-control" type="text" name="mb" value="<?=set_value('mb', $row->mb)?>" />
             </div>
-            <div class="form-group">
-                <label style="color: #fff;">CFP <span class="text-danger">*</span></label>
-                <input class="form-control" type="text" name="md" value="<?=set_value('md', $row->md)?>" />
-            </div>
+            
             <div class="form-group">
                 <button class="btn edit"><span class="glyphicon glyphicon-save"></span> Simpan</button>
                 <a class="btn edit" href="?m=pengetahuan"><span class="glyphicon glyphicon-arrow-left"></span> Kembali</a>

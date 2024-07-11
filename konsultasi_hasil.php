@@ -28,7 +28,7 @@ else :
         }
 
         $cf_penyakit = &$diagnosis[$row->kode_penyakit]['cf'];
-        $cf_gejala = ($row->mb - $row->md) * $BOBOT[$row->jawaban];
+        $cf_gejala = ($row->mb) * $BOBOT[$row->jawaban];
 
         if (($cf_gejala >= 0) && ($cf_penyakit >= 0)) {
             // kedua CF positif

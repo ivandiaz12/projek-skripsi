@@ -24,13 +24,12 @@
                 <th>No</th>
                 <th>Penyakit</th>
                 <th>Gejala</th>
-                <th>CFU</th>
                 <th>CFP</th>
                 <th>Aksi</th>
             </tr></thead>
             <?php
             $q = esc_field(@$_GET['q']);
-            $rows = $db->get_results("SELECT r.ID, r.kode_gejala, d.kode_penyakit, r.mb, r.md, g.nama_gejala, d.nama_penyakit 
+            $rows = $db->get_results("SELECT r.ID, r.kode_gejala, d.kode_penyakit, r.mb, g.nama_gejala, d.nama_penyakit 
                 FROM tb_pengetahuan r INNER JOIN tb_penyakit d ON d.`kode_penyakit`=r.`kode_penyakit` INNER JOIN tb_gejala g ON g.`kode_gejala`=r.`kode_gejala`
                 WHERE r.kode_gejala LIKE '%$q%'
                     OR r.kode_penyakit LIKE '%$q%'
@@ -45,7 +44,7 @@
                 <td>[<?=$row->kode_penyakit . '] ' . $row->nama_penyakit?></td>
                 <td>[<?=$row->kode_gejala . '] ' . $row->nama_gejala?></td>
                 <td><?=$row->mb?></td>
-                <td><?=$row->md?></td>
+                
                 <td class="nw">
                     <a class="btn btn-xs edit" href="?m=pengetahuan_ubah&ID=<?=$row->ID?>"><span class="glyphicon glyphicon-pencil"></span></a>
                     <a class="btn btn-xs edit" href="aksi.php?act=pengetahuan_hapus&ID=<?=$row->ID?>" onclick="return confirm('Hapus data?')"><span class="glyphicon glyphicon-trash"></span></a>
